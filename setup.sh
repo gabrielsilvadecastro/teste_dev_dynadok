@@ -29,7 +29,7 @@ dev_python() {
     echo "Iniciando servidor Python no modo de desenvolvimento..."
     
     # Cria e ativa o ambiente virtual
-    python -m venv .venv
+    python3 -m venv .venv
 
     # Verifica o sistema operacional para ativar o ambiente virtual corretamente
     if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]]; then

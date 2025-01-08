@@ -20,10 +20,6 @@ O resumo gerado é salvo com o texto original e a versao resumida e traduzido co
     - **services/**: Implementa a lógica de resumo de texto.
       - **llm_service.py**: Interage com LangChain para gerar resumos.
 
-## Environment
-
-**HF_TOKEN**: Token de acesso ao Hugging Face(https://huggingface.co/settings/tokens). Caso não tenha, crie uma conta e gere um token(gratuito).
-
 ## Como Executar
 
 1. Clone o repositório.
@@ -44,12 +40,14 @@ O resumo gerado é salvo com o texto original e a versao resumida e traduzido co
 
 - POST **/tasks**: Cria uma nova tarefa com o texto a ser resumido.
 - GET **/tasks**: Lista todas as tarefas criadas.
+- GET **/tasks/:id**: Lista tarefas por id.
 
-# Tarefas a serem realizadas
 
-### No projeto Node.js
+# Tarefas realizadas
 
-- No POST **/tasks**, a API deve receber um texto e um idioma e enviar para o serviço Python para gerar o resumo no idioma solicitado.
+### Projeto Node.js ✅
+
+-  No POST **/tasks**, a API deve receber um texto e um idioma e enviar para o serviço Python para gerar o resumo no idioma solicitado. 
 
   #### Parâmetros que devem ser recebidos pela API:
 
@@ -65,7 +63,7 @@ O resumo gerado é salvo com o texto original e a versao resumida e traduzido co
 
 - Deve ser possível acessar o resumo de uma tarefa através do endpoint GET **/tasks/:id**.
 
-  ### Deve retornar um JSON com as propriedades:
+  ### Deve retornar um JSON com as propriedades ✅:
 
   - `id`: Identificador da tarefa.
   - `text`: Texto original.
@@ -75,35 +73,14 @@ O resumo gerado é salvo com o texto original e a versao resumida e traduzido co
 - Deve ser possível remover uma tarefa através do endpoint DELETE **/tasks/:id**.
 - Persistir as informações das tarefas em um arquivo JSON.
 
-### No projeto Python
+### Projeto Python ✅
 
 - Implementar a lógica de resumo de texto utilizando LangChain(Prompt) no idioma solicitado.
   ### O resumo deve ser retornado em formato JSON, com a propriedades:
   - `summary`: Resumo gerado.
 
-## Em ambos os projetos
+## Ambos os projetos ✅
 
 - Deve possuir uma rota inicial(/) que retorne um JSON com a propriedade `message` contendo a mensagem "API is running".
 
-### Observações
 
-- Após a conclusão, suba o projeto no seu repositório pessoal e envie o link para o recrutador.
-- Caso tenha alguma dúvida, entre em contato com o recrutador.
-
-## Texto de Exemplo
-
-```
-Diagnósticos médicos e decisões jurídicas: o papel da IA
-A justiça e a Medicina são considerados campos de alto risco. Neles é mais urgente do que em qualquer outra área estabelecer sistemas para que os humanos tenham sempre a decisão final.
-
-Os especialistas em IA trabalham para garantir a confiança dos usuários, para que o sistema seja transparente, que proteja as pessoas e que os humanos estejam no centro das decisões.
-
-Aqui entra em jogo o desafio do "doutor centauro". Centauros são modelos híbridos de algoritmo que combinam análise formal de máquina e intuição humana.
-
-Um "médico centauro + um sistema de IA" melhora as decisões que os humanos tomam por conta própria e que os sistemas de IA tomam por conta própria.
-
-O médico sempre será quem aperta o botão final; e o juiz quem determina se uma sentença é justa.
-```
-FONTE: https://www.bbc.com/portuguese/articles/c2kx2e74jyxo
-
-# Desejamos um bom desafio! 🚀

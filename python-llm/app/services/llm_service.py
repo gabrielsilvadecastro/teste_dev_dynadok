@@ -18,8 +18,10 @@ class LLMService:
 
             target_language = supported_languages[lang]
             prompt = (
-                f"First, summarize the following text {text} "
-                f"Then, translate the summary into {target_language}:\n\n"
+                f"Summarize the following text: {text}.\n"
+                f"Then, translate the summary into {target_language}.\n"
+                f"Provide the response in the following format:\n"
+                f"summary: <translated summary>"
             )
 
             response = self.llm.invoke(prompt)

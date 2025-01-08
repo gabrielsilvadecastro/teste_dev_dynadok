@@ -3,13 +3,10 @@ import axios from "axios";
 import { TasksRepository } from "../repositories/tasksRepository";
 import dotenv from "dotenv";
 
-// Instância do repositório de tarefas
 const tasksRepository = new TasksRepository();
 
-// Idiomas suportados
 const supportedLanguages = ["pt", "en", "es"];
 
-// POST: Cria uma tarefa, traduz e solicita resumo ao serviço Python
 export const createTask = async (req: Request, res: Response) => {
   try {
     const { text, lang } = req.body;
@@ -21,19 +18,16 @@ export const createTask = async (req: Request, res: Response) => {
       return res.status(400).json({ error: "Language not supported" });
     }
 
-    // Cria a tarefa
     const task = await tasksRepository.createTask(text, lang);
 
-    // Solicita resumo ao serviço Python
     const pythonServiceUrl = `${process.env.PYTHON_LLM_URL}/summarize`; // URL do serviço Python
     const response = await axios.post(pythonServiceUrl, {
       text,
       lang,
     });
 
-    const summary = response.data.summary; // Supondo que o Python retorne o resumo no campo "summary"
+    const summary = response.data.summary;
 
-    // Atualiza a tarefa com o resumo
     await tasksRepository.updateTask(task.id, summary);
 
     return res.status(201).json({
@@ -48,7 +42,6 @@ export const createTask = async (req: Request, res: Response) => {
   }
 };
 
-// GET: Obtém uma tarefa pelo ID
 export const getTaskById = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
@@ -65,7 +58,6 @@ export const getTaskById = async (req: Request, res: Response) => {
   }
 };
 
-// DELETE: Remove uma tarefa pelo ID
 export const removeTask = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
@@ -79,8 +71,6 @@ export const removeTask = async (req: Request, res: Response) => {
   }
 };
 
-
-// GET: Lista todas as tarefas
 export const listTasks = async (req: Request, res: Response) => {
   try {
     const tasks = await tasksRepository.listTasks();

@@ -7,7 +7,7 @@ sys.path = sys.path + ["./app"]
 from fastapi import FastAPI
 from pydantic import BaseModel
 from services.llm_service import LLMService
-
+from fastapi.middleware.cors import CORSMiddleware
 
 title_project = "API Summarize Text"
 description_project = "Webservice destinado a realizar resumos de textos."
@@ -18,6 +18,17 @@ contact_project={
 }
 
 app = FastAPI(title=title_project, description=description_project, contact=contact_project)
+
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 llm_service = LLMService()
 
 class TextData(BaseModel):
